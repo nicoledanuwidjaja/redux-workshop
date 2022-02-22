@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
-import Colors from '../constants/Colors';
-import { TextInput, StyleSheet, TouchableOpacity } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import HangmanGame from '../components/HangmanGame';
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
-  const [isGame, setIsGame] = useState<Boolean>(false);
+export default function MainScreen({ navigation }: RootTabScreenProps<'Main'>) {
+  const [isNewGame, setIsNewGame] = useState<Boolean>(false);
   const [phrase, onChangeText] = useState<string>("");
 
   const submitWord = () => {
     console.log("Phrase: ", phrase);
-    setIsGame(true);
+    setIsNewGame(true);
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Hangman</Text>
       { 
-        isGame ?
-        <HangmanGame phrase={phrase} />
+        isNewGame ?
+        <HangmanGame setIsNewGame={setIsNewGame} phrase={phrase} />
         : 
         <View style={styles.newGameContainer}>
           <Text style={styles.prompt}>Choose a word or phrase</Text>
@@ -27,12 +26,12 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
             style={styles.wordInput}
             onChangeText={onChangeText}
             value={phrase}
-            maxLength={25}
+            lightColor="gray"
+            darkColor="white"
+            maxLength={14}
           />
           <TouchableOpacity style={styles.button} onPress={submitWord}>
-            <Text style={styles.buttonText}>
-              Play!
-            </Text>
+            <Text style={styles.buttonText}>Play!</Text>
           </TouchableOpacity>
         </View>
       }
@@ -43,7 +42,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 50,
+    paddingVertical: 30,
     alignItems: 'center',
   },
   newGameContainer: {
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
   },
   wordInput: {
     textAlign: 'center',
-    width: 150,
+    width: 180,
     letterSpacing: 1,
     fontSize: 20,
     height: 50,

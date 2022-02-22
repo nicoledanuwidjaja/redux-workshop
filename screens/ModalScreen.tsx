@@ -11,7 +11,7 @@ export default function ModalScreen() {
             style={styles.getStartedText}
             lightColor="rgba(0,0,0,0.8)"
             darkColor="rgba(255,255,255,0.8)">
-            Guess the word by entering in letters. If you enter too many wrong letters, you lose!
+            Guess the word by inputting letters. If you enter too many wrong letters, you'll hang the man and lose!
         </Text>
         <View
             style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
